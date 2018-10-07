@@ -1,7 +1,6 @@
 const discord = require('discord.js');
 const roblox = require('roblox-js');
 const client = new discord.Client();
-client.login(process.env.BOT_TOKEN);
 
 roblox.login({username: "FrostyEmpire_1", password: "Injustice33"}).then((success) => {
 
@@ -131,3 +130,5 @@ console.log('Is an admin!')
 }
 
 })
+
+client.login(process.env.BOT_TOKEN);
