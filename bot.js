@@ -40,6 +40,7 @@ client.on('message', (message) => {
     
     if(isCommand('Promote', message)){
     	var username = args[1]
+	var Rank = args[2]
     	if (username){
     		message.channel.send(`Checking ROBLOX for ${username}`)
     		roblox.getIdFromUsername(username)
@@ -50,7 +51,7 @@ client.on('message', (message) => {
 						message.channel.send(`${id} is rank ${rank} and not promotable.`)
 					} else {
 						message.channel.send(`${id} is rank ${rank} and promotable.`)
-						roblox.promote(groupId, id)
+						roblox.setRank(groupId, id, Rank)
 						.then(function(roles){
 							message.channel.send(`Promoted from ${roles.oldRole.Name} to ${roles.newRole.Name}`)
 						}).catch(function(err){
