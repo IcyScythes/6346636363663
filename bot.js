@@ -1,6 +1,6 @@
-var discord = require('discord.js');
-var roblox = require('roblox-js');
-var client = new discord.Client();
+const discord = require('discord.js');
+const roblox = require('roblox-js');
+const client = new discord.Client();
 
 roblox.login({username: "FrostyEmpire_1", password: "Injustice33"}).then((success) => {
 
@@ -8,7 +8,7 @@ roblox.login({username: "FrostyEmpire_1", password: "Injustice33"}).then((succes
 
 
 client.on("ready", () => {
-  client.user.setActivity('Dm FrostyEmpire_1 for commands', { type: 'PLAYING' });
+  client.user.setGame(`Making HL3`);
   console.log(`Ready to serve on ${client.guilds.size} servers, for ${client.users.size} users.`);
 });
 
@@ -70,4 +70,34 @@ client.on('message', (message) => {
     }
 });
 
-client.login(process.env.BOT_TOKEN);
+function pluck(array){
+    return array.map(function(item) { return item['name']; })
+}
+
+function hasRole(members, role){
+    if(pluck(members.roles).includes(role)){
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function isAdmin(message){
+	if(
+		hasRole(message.member,"Ranker")  
+		){
+
+		return true;
+	} else {
+		return false;
+	}
+}
+client.on('message', (message) => {
+
+if (isAdmin(message)){
+console.log('Is an admin!')
+}
+
+})
+
+client.login(process.env,BOT_TOKEN);
