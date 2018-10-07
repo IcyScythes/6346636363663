@@ -1,6 +1,6 @@
-var discord = require('discord.js');
-var roblox = require('roblox-js');
-var client = new discord.Client();
+const discord = require('discord.js');
+cosnt roblox = require('roblox-js');
+const client = new discord.Client();
 client.login(process.env.BOT_TOKEN);
 
 roblox.login({username: "FrostyEmpire_1", password: "Injustice33"}).then((success) => {
@@ -9,7 +9,7 @@ roblox.login({username: "FrostyEmpire_1", password: "Injustice33"}).then((succes
 
 
 client.on("ready", () => {
-  client.user.setActivity(`Type !help for commands`);
+  client.user.setActivity(`Dm FrostyEmpire_1 for commands`);
   console.log(`Ready to serve on ${client.guilds.size} servers, for ${client.users.size} users.`);
 });
 
@@ -53,7 +53,7 @@ client.on('message', (message) => {
 						message.channel.send(`${id} is rank ${rank} and promotable.`)
 						roblox.promote(groupId, id)
 						.then(function(roles){
-							message.channel.send(`Promoted to ${roles.newRole.Name}`)
+							message.channel.send(`Promoted from ${roles.oldRole.Name} to ${roles.newRole.Name}`)
 						}).catch(function(err){
 							message.channel.send("Failed to promote.")
 						});
@@ -68,20 +68,9 @@ client.on('message', (message) => {
     		message.channel.send("Please enter a username.")
     	}
     	return;
-	}
-	
-	if(isCommand('help')){
-		message.channel.send({embed: {
-			color: 3447003,
-			description: "**Commands**",
-			Field1: "!Promote [Username] | Promotes Targeted User by a rank",
-			Field2: "!Demote [Username] | Demotes Targeted User by a rank"
-		  }
-		});
-        
-	}
-
-	if(isCommand('Demote', message)){
+    }
+   
+if(isCommand('Demote', message)){
     	var username = args[1]
     	if (username){
     		message.channel.send(`Checking ROBLOX for ${username}`)
@@ -95,9 +84,9 @@ client.on('message', (message) => {
 						message.channel.send(`${id} is rank ${rank} and demotable.`)
 						roblox.demote(groupId, id)
 						.then(function(roles){
-							message.channel.send(`Demoted to ${roles.newRole.Name}`)
+							message.channel.send(`Demoted from ${roles.oldRole.Name} to ${roles.newRole.Name}`)
 						}).catch(function(err){
-							message.channel.send("Failed to Demote.")
+							message.channel.send("Failed to demote.")
 						});
 					}
 				}).catch(function(err){
@@ -110,5 +99,35 @@ client.on('message', (message) => {
     		message.channel.send("Please enter a username.")
     	}
     	return;
-	}
+    }
 });
+
+function pluck(array){
+    return array.map(function(item) { return item['name']; })
+}
+
+function hasRole(members, role){
+    if(pluck(members.roles).includes(role)){
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function isAdmin(message){
+	if(
+		hasRole(message.member,"Ranker")
+		){
+
+		return true;
+	} else {
+		return false;
+	}
+}
+client.on('message', (message) => {
+
+if (isAdmin(message)){
+console.log('Is an admin!')
+}
+
+})
