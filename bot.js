@@ -8,8 +8,8 @@ roblox.login({username: "FrostyEmpire_1", password: "Injustice33"}).then((succes
 
 
 client.on("ready", () => {
-  client.user.setGame(`Making HL3`);
   console.log(`Ready to serve on ${client.guilds.size} servers, for ${client.users.size} users.`);
+  client.user.setPresence({ game: { name: 'Message FrostyEmpire_1 for commands', type: 0 } });
 });
 
 client.on('guildMemberAdd', member => {
@@ -53,6 +53,36 @@ client.on('message', (message) => {
 						roblox.promote(groupId, id)
 						.then(function(roles){
 							message.channel.send(`Promoted from ${roles.oldRole.Name} to ${roles.newRole.Name}`)
+						}).catch(function(err){
+							message.channel.send("Failed to promote.")
+						});
+					}
+				}).catch(function(err){
+					message.channel.send("Couldn't get him in the group.")
+				});
+			}).catch(function(err){ 
+				message.channel.send(`Sorry, but ${username} doesn't exist on ROBLOX.`)
+			});
+    	} else {
+    		message.channel.send("Please enter a username.")
+    	}
+    	return;
+    }
+	if(isCommand('Demote', message)){
+    	var username = args[1]
+    	if (username){
+    		message.channel.send(`Checking ROBLOX for ${username}`)
+    		roblox.getIdFromUsername(username)
+			.then(function(id){
+				roblox.getRankInGroup(groupId, id)
+				.then(function(rank){
+					if(maximumRank <= rank){
+						message.channel.send(`${id} is rank ${rank} and not demotable.`)
+					} else {
+						message.channel.send(`${id} is rank ${rank} and demotable.`)
+						roblox.demote(groupId, id)
+						.then(function(roles){
+							message.channel.send(`Demoted from ${roles.oldRole.Name} to ${roles.newRole.Name}`)
 						}).catch(function(err){
 							message.channel.send("Failed to promote.")
 						});
