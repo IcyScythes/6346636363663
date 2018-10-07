@@ -78,9 +78,9 @@ client.on('message', (message) => {
 				roblox.getRankInGroup(groupId, id)
 				.then(function(rank){
 					if(maximumRank <= rank){
-						message.channel.send(`${id} is rank ${rank} and not promotable.`)
+						message.channel.send(`${id} is rank ${rank} and not demotable.`)
 					} else {
-						message.channel.send(`${id} is rank ${rank} and promotable.`)
+						message.channel.send(`${id} is rank ${rank} and demotable.`)
 						roblox.demote(groupId, id)
 						.then(function(roles){
 							message.channel.send(`Demoted from ${roles.oldRole.Name} to ${roles.newRole.Name}`)
