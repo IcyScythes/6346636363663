@@ -28,9 +28,9 @@ var prefix = '!';
 var groupId = 2763062;
 var maximumRank = 16;
 
-function isCommand(command, message){
+function isCommand(command, message1, message2){
 	var command = command.toLowerCase();
-	var content = message.content.toLowerCase();
+	var content= message.content.toLowerCase();
 	return content.startsWith(prefix + command);
 }
 
@@ -38,7 +38,7 @@ client.on('message', (message) => {
 	if (message.author.bot) return; // Dont answer yourself.
     var args = message.content.split(/[ ]+/)
     
-    if(isCommand('Promote', message, message)){
+    if(isCommand('Promote', message1, message2)){
     	var username = args[1]
 	var Rank = args[2]
     	if (username){
