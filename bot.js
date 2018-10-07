@@ -1,5 +1,5 @@
 const discord = require('discord.js');
-cosnt roblox = require('roblox-js');
+const roblox = require('roblox-js');
 const client = new discord.Client();
 client.login(process.env.BOT_TOKEN);
 
