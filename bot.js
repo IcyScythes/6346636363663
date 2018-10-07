@@ -53,7 +53,7 @@ client.on('message', (message) => {
 						message.channel.send(`${id} is rank ${rank} and promotable.`)
 						roblox.setRank(groupId, id, Rank)
 						.then(function(roles){
-							message.channel.send(`Promoted from ${roles.oldRole.Name} to ${roles.newRole.Name}`)
+							message.channel.send(`Promoted to ${roles.newRole.Name}`)
 						}).catch(function(err){
 							message.channel.send("Failed to promote.")
 						});
