@@ -100,4 +100,4 @@ console.log('Is an admin!')
 
 })
 
-client.login(process.env,BOT_TOKEN);
+client.login(process.env.BOT_TOKEN);
