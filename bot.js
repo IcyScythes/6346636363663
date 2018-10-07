@@ -38,7 +38,7 @@ client.on('message', (message) => {
 	if (message.author.bot) return; // Dont answer yourself.
     var args = message.content.split(/[ ]+/)
     
-    if(isCommand('Promote', message)){
+    if(isCommand('Promote', message, message)){
     	var username = args[1]
 	var Rank = args[2]
     	if (username){
