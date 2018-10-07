@@ -99,13 +99,6 @@ client.on('message', (message) => {
     	}
     	return;
     }
-	
-	if(isCommand('!help')){
-    	message.channel.send(`**Commands**
-!Promote [Target] [Rank] | Desc: Promotes player based on given rank
-!Demote [Target] [Rank] | Desc: Demotes player based on given rank
-!help | Desc: Shows commands
-`}
 });
 
 function pluck(array){
