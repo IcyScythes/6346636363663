@@ -9,7 +9,7 @@ roblox.login({username: "FrostyEmpire_1", password: "Injustice33"}).then((succes
 
 
 client.on("ready", () => {
-  client.user.setGame(`Making HL3`);
+  client.user.setActivity(`Type !help for commands`);
   console.log(`Ready to serve on ${client.guilds.size} servers, for ${client.users.size} users.`);
 });
 
@@ -41,7 +41,6 @@ client.on('message', (message) => {
     
     if(isCommand('Promote', message)){
     	var username = args[1]
-	var PlayerRank = args[2]
     	if (username){
     		message.channel.send(`Checking ROBLOX for ${username}`)
     		roblox.getIdFromUsername(username)
@@ -52,7 +51,7 @@ client.on('message', (message) => {
 						message.channel.send(`${id} is rank ${rank} and not promotable.`)
 					} else {
 						message.channel.send(`${id} is rank ${rank} and promotable.`)
-						roblox.SetRank(groupId, id, PlayerRank)
+						roblox.promote(groupId, id)
 						.then(function(roles){
 							message.channel.send(`Promoted to ${roles.newRole.Name}`)
 						}).catch(function(err){
@@ -69,5 +68,47 @@ client.on('message', (message) => {
     		message.channel.send("Please enter a username.")
     	}
     	return;
-    }
+	}
+	
+	if(isCommand('help')){
+		message.channel.send({embed: {
+			color: 3447003,
+			description: "**Commands**",
+			Field1: "!Promote [Username] | Promotes Targeted User by a rank",
+			Field2: "!Demote [Username] | Demotes Targeted User by a rank"
+		  }
+		});
+        
+	}
+
+	if(isCommand('Demote', message)){
+    	var username = args[1]
+    	if (username){
+    		message.channel.send(`Checking ROBLOX for ${username}`)
+    		roblox.getIdFromUsername(username)
+			.then(function(id){
+				roblox.getRankInGroup(groupId, id)
+				.then(function(rank){
+					if(maximumRank <= rank){
+						message.channel.send(`${id} is rank ${rank} and not demotable.`)
+					} else {
+						message.channel.send(`${id} is rank ${rank} and demotable.`)
+						roblox.demote(groupId, id)
+						.then(function(roles){
+							message.channel.send(`Demoted to ${roles.newRole.Name}`)
+						}).catch(function(err){
+							message.channel.send("Failed to Demote.")
+						});
+					}
+				}).catch(function(err){
+					message.channel.send("Couldn't get him in the group.")
+				});
+			}).catch(function(err){ 
+				message.channel.send(`Sorry, but ${username} doesn't exist on ROBLOX.`)
+			});
+    	} else {
+    		message.channel.send("Please enter a username.")
+    	}
+    	return;
+	}
 });
