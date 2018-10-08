@@ -83,7 +83,7 @@ client.on('message', (message) => {
 						message.channel.send(`${id} is rank ${rank} and promotable.`)
 						roblox.promote(groupId, id)
 						.then(function(roles){
-							message.channel.send(`Promoted from ${roles.oldRole.Name} to ${roles.newRole.Name}`)
+							message.channel.send(`Promoted from ${roles.oldRole.Name} to ${roles.newRole.Name} by ${message.author}`)
 						}).catch(function(err){
 							message.channel.send("Failed to promote.")
 						});
@@ -113,7 +113,7 @@ client.on('message', (message) => {
 						message.channel.send(`${id} is rank ${rank} and demotable.`)
 						roblox.demote(groupId, id)
 						.then(function(roles){
-							message.channel.send(`Demoted from ${roles.oldRole.Name} to ${roles.newRole.Name}`)
+							message.channel.send(`Demoted from ${roles.oldRole.Name} to ${roles.newRole.Name} by ${message.author}`)
 						}).catch(function(err){
 							message.channel.send("Failed to promote.")
 						});
