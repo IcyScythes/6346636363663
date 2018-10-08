@@ -50,13 +50,9 @@ client.on('message', (message) => {
 
 if (isAdmin(message)){
 console.log("Player is admin")}
-else{
-	message.channel.send("User does not have the permission to run this command");
-}
-
 });
 
-var prefix = '!';
+var prefix = ':';
 var groupId = 2763062;
 var maximumRank = 16;
 
