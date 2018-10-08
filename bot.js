@@ -38,7 +38,12 @@ function hasRole(members, role){
 
 function isAdmin(message){
 	if(
-		hasRole(message.member,"Ranker")
+		hasRole(message.member,"Commander") || 
+		hasRole(message.member,"Arch Admiral") || 
+		hasRole(message.member,"Viceroy") || 
+		hasRole(message.member,"Colonel") || 
+		hasRole(message.member,"Admiral") || 
+		hasRole(message.member,"Captain") 
 		){
 
 		return true;
@@ -49,7 +54,9 @@ function isAdmin(message){
 client.on('message', (message) => {
 
 if (isAdmin(message)){
-console.log("Player is admin")}
+console.log('Is an admin!')
+}
+
 });
 
 var prefix = ':';
