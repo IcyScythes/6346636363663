@@ -38,12 +38,8 @@ function hasRole(members, role){
 
 function isAdmin(message){
 	if(
-		hasRole(message.member,"Commander") || 
-		hasRole(message.member,"Arch Admiral") || 
-		hasRole(message.member,"Viceroy") || 
-		hasRole(message.member,"Colonel") || 
-		hasRole(message.member,"Admiral") || 
-		hasRole(message.member,"Captain") 
+		hasRole(message.member,"Ranker") ||
+		hasRole(message.member,"Generalissimus") 
 		){
 
 		return true;
