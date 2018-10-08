@@ -38,7 +38,7 @@ function hasRole(members, role){
 
 function isAdmin(message){
 	if(
-		hasRole(message.member,"Ranker") ||
+		hasRole(message.member,"Ranker") || 
 		hasRole(message.member,"Generalissimus") 
 		){
 
