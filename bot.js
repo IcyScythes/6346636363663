@@ -43,13 +43,15 @@ function isAdmin(message){
 
 		return true;
 	} else {
-		return message.channel.send("You do not have permission to run this command");
+		return false;
 	}
 }
 client.on('message', (message) => {
 
 if (isAdmin(message)){
-console.log('Is an admin!')
+console.log("Player is admin")}
+else{
+	message.channel.send("Player does not have the permission to run this command")
 }
 
 });
