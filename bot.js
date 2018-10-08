@@ -43,7 +43,7 @@ function isAdmin(message){
 
 		return true;
 	} else {
-		return false;
+		return message.channel.send("You do not have permission to run this command");
 	}
 }
 client.on('message', (message) => {
