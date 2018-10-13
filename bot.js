@@ -26,7 +26,7 @@ client.on('guildMemberRemove', member => {
 
 var prefix = ':';
 var groupId = 2763062;
-var maximumRank = 16;
+var maximumRank = 6;
 
 function isCommand(command, message){
 	var command = command.toLowerCase();
