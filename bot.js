@@ -24,37 +24,6 @@ client.on('guildMemberRemove', member => {
   console.log(`${user.tag} left ${guild}`)
 });
 
-function pluck(array){
-    return array.map(function(item) { return item['name']; })
-}
-
-function hasRole(members, role){
-    if(pluck(members.roles).includes(role)){
-        return true;
-    } else {
-        return false;
-    }
-}
-
-function isAdmin(message){
-	if(
-		hasRole(message.member,"Ranker") || 
-		hasRole(message.member,"Generalissimus") 
-		){
-
-		return true;
-	} else {
-		return false;
-	}
-}
-client.on('message', (message) => {
-
-if (isAdmin(message)){
-console.log('Is an admin!')
-}
-
-});
-
 var prefix = ':';
 var groupId = 2763062;
 var maximumRank = 16;
@@ -129,7 +98,37 @@ client.on('message', (message) => {
     	}
     	return;
     }
+	function pluck(array){
+    return array.map(function(item) { return item['name']; })
+}
+
+function hasRole(members, role){
+    if(pluck(members.roles).includes(role)){
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function isAdmin(message){
+	if(
+		hasRole(message.member,"Ranker")
+		){
+
+		return true;
+	} else {
+		return false;
+	}
+}
+
+client.on('message', (message) => {
+
+if (isAdmin(message)){
+console.log('Is an admin!')
+}
 });
+});
+
 
 
 client.login(process.env.BOT_TOKEN);
